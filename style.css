@@ -1,0 +1,35 @@
+html{
+	padding:0px;
+	background: black;
+	overflow: hidden;
+}
+.snow{
+	display: block;
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border-radius: 1rem;
+}
+
+#snow_box{
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+.f1,.f2,.f3,.f4{
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.f1{
+	background-image: url("floco_1.png");
+}
+.f2{
+	background-image: url("floco_2.png");
+}
+.f3{
+	background-image: url("floco_3.png");
+}
+.f4{
+	background-image: url("floco_4.png");
+}
