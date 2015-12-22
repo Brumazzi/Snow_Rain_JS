@@ -1,0 +1,40 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+main{
+	margin-top: 1rem;
+}
+
+header,p{
+	color: #000;
+	display:block;
+	width: 100%;
+}
+
+header h1{
+	display: table;
+	margin :auto;
+}
+
+footer{
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	position: absolute;
+	display: table;
+	bottom: 0px;
+	margin-bottom: 0px;
+	width: 100%;
+	color: #000;
+}
+
+footer .left{
+	float: left;
+	margin-left: 5rem;
+}
+
+footer .right{
+	float: right;
+	margin-right:5rem;
+}

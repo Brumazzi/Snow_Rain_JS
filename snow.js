@@ -1,5 +1,5 @@
-var width, height, l_or_r; // Variaveis de tamanho e direção do vento
-
+var width, height, l_or_r, lr=0.0; // Variaveis de tamanho e direção do vento
+var direct = true;
 l_or_r = parseInt(Math.random()*4)-2;
 // Define a direção do vento + velocidade
 
@@ -27,10 +27,25 @@ function compare_top(top, val){
 	l_or_r = (parseInt(e.clientX) <= (width/2)) ? -(e.clientX%10) : e.clientX%10;
 }*/
 
+// Rotaciona os flocos
+var ang = 0;
+function rotate(){
+	ang += 0.2;
+	//$('.snow').css("transfor":"rotate("+ang+"deg)");
+}
+
 // Faz o deslocamento do floco
 function wind(element){
-	var pos = parseInt(element.style.left.replace("px",""));
-	pos += l_or_r;
+	var pos = parseFloat(element.style.left.replace("px",""));
+	if(direct)
+		lr += 0.02;
+	else
+		lr -= 0.02;
+	if(lr >= l_or_r)
+		direct = false;
+	else if(lr <= -(l_or_r))
+		direct = true;
+	pos += lr;
 	return pos+"px";
 }
 
@@ -72,7 +87,10 @@ function start_snow(flakes){
 		lines.push([flake,0]);
 	}
 	// cria função que executa em um intervalo de tempo
+	var alfa = 0.0;
+	var bl;
 	var thread = setInterval(function(){
+		//rotate();
 		for(var x=0;x<lines.length;x+=1){
 			if(compare_top(lines[x][0].style.top,height-10)){
 				// Faz o floco descer
@@ -80,10 +98,17 @@ function start_snow(flakes){
 				//faz o floco se deslocar para o lado
 				lines[x][0].style.left = wind(lines[x][0]);
 				no_out(lines[x][0]); // Limite da tela
+				lines[x][0].style.transform = "rotate("+ang+"deg)";
+				ang += 0.05;
+				ang = ang > 360 ? 0 : ang;
 			}
 			else{
 				// reinicia o floco ao topo da tela
 				if(lines[x][1] >= 25){
+					alfa += 0.001;
+					bl = $('.bleach');
+					for(var y=0;y<bl.length;y+=1)
+						bl[y].style.background = "rgba(255,255,255,"+alfa+")";
 					lines[x][1] = 0;
 					lines[x][0].style.top = -(rand()%1000)+"px";
 					lines[x][0].style.left = rand()+"px";
